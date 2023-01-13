@@ -16,21 +16,12 @@ export const AuthSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  telephone: {
-    type: Number,
-    required: true,
-  },
 });
 
 //static signup method
 
-AuthSchema.statics.signup = async function (
-  full_name,
-  email,
-  password,
-  telephone
-) {
-  if (!full_name || !email || !password || !telephone) {
+AuthSchema.statics.signup = async function (full_name, email, password) {
+  if (!full_name || !email || !password) {
     throw Error("Please fill in all fields");
   }
 
@@ -51,7 +42,6 @@ AuthSchema.statics.signup = async function (
     full_name,
     email,
     password: hash,
-    telephone,
   });
 
   return newUser;
